@@ -31,7 +31,7 @@ impl Game {
             ));
         }
     }
-    pub(super) fn keep_in_play_field(&mut self) {
+    fn keep_in_play_field(&mut self) {
         // keep paddle in bounds
         if self.paddle.next_boundary().left() < self.play_field.left() {
             self.paddle.set_position(Vec2::new(
