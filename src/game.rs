@@ -140,21 +140,32 @@ impl Game {
     fn handle_collision(&mut self) {
         self.keep_in_play_field();
 
+        // ball and blocks
         for block in self.level.blocks_mut() {
             if block.boundary().overlaps(self.ball.boundary()) && block.is_alive {
-
-                if self.ball.boundary().top() <= block.boundary().bottom() 
-                    || self.ball.boundary().bottom() >= block.boundary().top() {
-                    self.ball.reflect_velocity_y();
-                }
-                if self.ball.boundary().left() <= block.boundary().right() 
-                    || self.ball.boundary().right() >= block.boundary().left() {
-                    self.ball.reflect_velocity_x();
-                }
+                let offset = self.ball.boundary().center().x - block.boundary().center().x;
+                let normalized_offset = offset / (block.boundary().w / 2.0);
+    
+                self.ball.set_velocity(Vec2::new(
+                    normalized_offset * gen_range(2.0, 5.0),
+                    -self.ball.velocity().y,
+                ));
 
                 block.is_alive = false;
             }
         }
+
+        // ball and paddle
+        if self.paddle.boundary().overlaps(self.ball.boundary()) {
+            let offset = self.ball.boundary().center().x - self.paddle.boundary().center().x;
+            let normalized_offset = offset / (self.paddle.boundary().w / 2.0);
+
+            self.ball.set_velocity(Vec2::new(
+                normalized_offset * gen_range(2.0, 5.0),
+                -self.ball.velocity().y,
+            ));
+        }
+
     }
     fn keep_in_play_field(&mut self) {
         // keep paddle in bounds
