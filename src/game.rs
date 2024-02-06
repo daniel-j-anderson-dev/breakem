@@ -228,5 +228,13 @@ pub enum Menu {
 }
 
 fn seed_random_with_current_time() {
-    
+    use std::time::{UNIX_EPOCH, SystemTime};
+    use macroquad::rand::srand;
+
+    srand(
+        SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("Time went backwards")
+        .as_secs()
+    );
 }
