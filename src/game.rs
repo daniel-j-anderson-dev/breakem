@@ -24,7 +24,7 @@ pub struct Game {
 // constructors and constants
 impl Game {
     pub fn new() -> Self {
-        seed_random();
+        seed_random_with_current_time();
 
         let level = Level::one();
         let paddle = Paddle::in_level(&level);
@@ -211,14 +211,6 @@ pub enum Menu {
     GameOver,
 }
 
-fn seed_random() {
-    use macroquad::rand::srand;
-    use std::time::{SystemTime, UNIX_EPOCH};
+fn seed_random_with_current_time() {
 
-    srand(
-        SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .expect("time went backwards")
-            .as_secs(),
-    );
 }
