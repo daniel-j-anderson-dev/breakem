@@ -26,7 +26,7 @@ impl Game {
     }
     fn draw_level(&self) {
         for block in self.level.blocks() {
-            if block.is_alive {
+            if block.is_alive() {
                 draw_bordered_offset(
                     self.play_field_offset,
                     block.boundary(),

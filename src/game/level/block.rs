@@ -4,20 +4,20 @@ use crate::game::draw::DEFAULT_BORDER_COLOR;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Block {
-    pub boundary: Rect,
-    pub is_alive: bool,
-    pub interior_color: Color,
-    pub border_color: Color,
+    boundary: Rect,
+    is_alive: bool,
+    interior_color: Color,
+    border_color: Color,
 }
 
 // constructors and constants
 impl Block {
-    pub fn new(boundary: Rect, color: Color, is_alive: bool) -> Self {
+    pub fn new(boundary: Rect, color: Color, border_color: Color) -> Self {
         return Block {
             boundary,
             interior_color: color,
-            is_alive,
-            border_color: DEFAULT_BORDER_COLOR,
+            is_alive: true,
+            border_color,
         };
     }
 }

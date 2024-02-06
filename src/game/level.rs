@@ -31,6 +31,6 @@ impl Level {
         return self.blocks.iter_mut();
     }
     pub fn is_complete(&self) -> bool {
-        return self.blocks().filter(|block| block.is_alive).count() == 0;
+        return self.blocks().filter(|block| block.is_alive()).count() == 0;
     }
 }

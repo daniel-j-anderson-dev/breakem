@@ -7,7 +7,7 @@ impl Game {
 
         // ball and blocks
         for block in self.level.blocks_mut() {
-            if block.boundary().overlaps(self.ball.boundary()) && block.is_alive {
+            if block.boundary().overlaps(self.ball.boundary()) && block.is_alive() {
                 let offset = self.ball.boundary().center().x - block.boundary().center().x;
                 let normalized_offset = offset / (block.boundary().w / 2.0);
 
@@ -16,7 +16,7 @@ impl Game {
                     -self.ball.velocity().y,
                 ));
 
-                block.is_alive = false;
+                block.set_is_alive(false);
             }
         }
 
