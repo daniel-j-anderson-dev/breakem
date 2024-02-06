@@ -73,9 +73,10 @@ impl Game {
             Vec2::new(label_position.x, screen_size.y / 4.0 + buffer_space * 3.0);
 
         let (label_text, play_button_text, exit_button_text) = match menu {
-            Menu::Main => ("Breakem", "start game", "quit main menu"),
+            Menu::Main => ("Breakem", "start game", "quit"),
             Menu::Pause => ("Paused", "continue game", "return to main menu"),
             Menu::GameOver => ("GAME OVER", "continue game", "return to main menu"),
+            Menu::LevelComplete => ("Level Complete", "next level", "return to main menu"),
         };
 
         let window = Window::new(0, Vec2::ZERO, screen_size);
@@ -87,6 +88,7 @@ impl Game {
                     Menu::Main => self.full_reset(),
                     Menu::GameOver => self.level_reset(),
                     Menu::Pause => {}
+                    Menu::LevelComplete => todo!("change level"),
                 };
                 self.state = GameState::Playing
             }
@@ -94,7 +96,9 @@ impl Game {
             if ui.button(exit_button_position, exit_button_text) {
                 self.state = match menu {
                     Menu::Main => GameState::Quit,
-                    Menu::Pause | Menu::GameOver => GameState::NotPlaying(Menu::Main),
+                    Menu::Pause | Menu::GameOver | Menu::LevelComplete => {
+                        GameState::NotPlaying(Menu::Main)
+                    }
                 }
             }
         });
@@ -108,6 +112,17 @@ impl Game {
         if self.lives == 0 {
             self.state = GameState::NotPlaying(Menu::GameOver);
             return;
+        }
+
+        if self
+            .level
+            .blocks()
+            .iter()
+            .filter(|block| block.is_alive)
+            .count()
+            == 0
+        {
+            self.state = GameState::NotPlaying(Menu::LevelComplete);
         }
 
         self.ball.apply_velocity();
@@ -209,8 +224,9 @@ pub enum Menu {
     Main,
     Pause,
     GameOver,
+    LevelComplete,
 }
 
 fn seed_random_with_current_time() {
-
+    
 }
