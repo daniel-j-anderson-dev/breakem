@@ -18,17 +18,19 @@ impl Level {
 
 // getters
 impl Level {
-    pub fn blocks(&self) -> &[Block] {
-        return &self.blocks;
-    }
     pub fn boundary(&self) -> Rect {
         return self.boundary;
     }
     pub fn id(&self) -> usize {
         return self.id;
     }
-
-    pub fn blocks_mut(&mut self) -> &mut [Block] {
-        return &mut self.blocks;
+    pub fn blocks(&self) -> impl Iterator<Item = &Block> {
+        return self.blocks.iter();
+    }
+    pub fn blocks_mut(&mut self) -> impl Iterator<Item = &mut Block> {
+        return self.blocks.iter_mut();
+    }
+    pub fn is_complete(&self) -> bool {
+        return self.blocks().filter(|block| block.is_alive).count() == 0;
     }
 }

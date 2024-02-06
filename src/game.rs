@@ -57,7 +57,7 @@ impl Game {
 }
 
 // update functions
-impl Game { 
+impl Game {
     pub fn update(&mut self) {
         match self.state {
             GameState::NotPlaying(menu) => self.display_menu(menu),
@@ -76,14 +76,7 @@ impl Game {
             return;
         }
 
-        if self
-            .level
-            .blocks()
-            .iter()
-            .filter(|block| block.is_alive)
-            .count()
-            == 0
-        {
+        if self.level.is_complete() {
             self.state = GameState::NotPlaying(Menu::LevelComplete);
         }
 
