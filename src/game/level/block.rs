@@ -1,0 +1,57 @@
+use macroquad::prelude::*;
+
+use crate::game::draw::DEFAULT_BORDER_COLOR;
+
+#[derive(Debug, Clone, Copy)]
+pub struct Block {
+    pub boundary: Rect,
+    pub is_alive: bool,
+    pub interior_color: Color,
+    pub border_color: Color,
+}
+
+// constructors and constants
+impl Block {
+    pub fn new(boundary: Rect, color: Color, is_alive: bool) -> Self {
+        return Block {
+            boundary,
+            interior_color: color,
+            is_alive,
+            border_color: DEFAULT_BORDER_COLOR,
+        };
+    }
+}
+
+// setters and getters
+impl Block {
+    pub fn border_color(&self) -> Color {
+        return self.border_color;
+    }
+    pub fn boundary(&self) -> &Rect {
+        return &self.boundary;
+    }
+    pub fn interior_color(&self) -> Color {
+        return self.interior_color;
+    }
+    pub fn is_alive(&self) -> bool {
+        return self.is_alive;
+    }
+    pub fn position(&self) -> Vec2 {
+        return self.boundary.point();
+    }
+    pub fn set_border_color(&mut self, border_color: Color) {
+        self.border_color = border_color;
+    }
+    pub fn set_is_alive(&mut self, is_alive: bool) {
+        self.is_alive = is_alive
+    }
+    pub fn set_boundary(&mut self, boundary: Rect) {
+        self.boundary = boundary;
+    }
+    pub fn set_color(&mut self, color: Color) {
+        self.interior_color = color;
+    }
+    pub fn set_position(&mut self, position: Vec2) {
+        self.boundary.move_to(position);
+    }
+}
