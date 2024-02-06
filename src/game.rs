@@ -134,13 +134,14 @@ impl Game {
     }
 }
 
-// Game::play helpers
+// Game::tick helpers
 impl Game {
     fn handle_collision(&mut self) {
         self.keep_in_play_field();
 
         for block in self.level.blocks_mut() {
             if block.boundary().overlaps(self.ball.boundary()) && block.is_alive {
+
                 if self.ball.boundary().top() <= block.boundary().bottom() 
                     || self.ball.boundary().bottom() >= block.boundary().top() {
                     self.ball.reflect_velocity_y();
