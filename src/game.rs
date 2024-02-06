@@ -87,7 +87,7 @@ impl Game {
                 match menu {
                     Menu::Main => self.full_reset(),
                     Menu::GameOver => self.level_reset(),
-                    Menu::LevelComplete => todo!(),
+                    Menu::LevelComplete => self.next_level(),
                     Menu::Pause => {}
                 };
                 self.state = GameState::Playing
@@ -145,6 +145,9 @@ impl Game {
         self.ball = Ball::on_paddle(&self.paddle);
         self.score = 0;
         self.lives = 10;
+    }
+    fn next_level(&self) {
+        todo!("change level");
     }
 }
 
