@@ -35,11 +35,23 @@ impl Paddle {
     pub fn boundary(&self) -> &Rect {
         return &self.boundary;
     }
-    pub fn velocity(&self) -> Vec2 {
-        return self.velocity;
+    pub fn next_boundary(&self) -> Rect {
+        let mut next_boundary = self.boundary;
+        next_boundary.x += self.velocity.x;
+        next_boundary.y += self.velocity.y;
+        return next_boundary;
+    }
+    pub fn next_position(&self) -> Vec2 {
+        let mut next_position = self.position();
+        next_position.x += self.velocity.x;
+        next_position.y += self.velocity.y;
+        return next_position;
     }
     pub fn position(&self) -> Vec2 {
         return self.boundary.point();
+    }
+    pub fn velocity(&self) -> Vec2 {
+        return self.velocity;
     }
     pub fn interior_color(&self) -> Color {
         return self.interior_color;

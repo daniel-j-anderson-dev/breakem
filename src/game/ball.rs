@@ -32,6 +32,18 @@ impl Ball {
     pub fn boundary(&self) -> &Rect {
         return &self.boundary;
     }
+    pub fn next_boundary(&self) -> Rect {
+        let mut next_boundary = self.boundary;
+        next_boundary.x += self.velocity.x;
+        next_boundary.y += self.velocity.y;
+        return next_boundary;
+    }
+    pub fn next_position(&self) -> Vec2 {
+        let mut next_position = self.position();
+        next_position.x += self.velocity.x;
+        next_position.y += self.velocity.y;
+        return next_position;
+    }
     pub fn position(&self) -> Vec2 {
         return self.boundary.point();
     }
@@ -51,7 +63,14 @@ impl Ball {
         self.boundary = boundary;
     }
     pub fn set_position(&mut self, position: Vec2) {
-        self.boundary.move_to(position);
+        self.set_x_position(position.x);
+        self.set_y_position(position.y);
+    }
+    pub fn set_x_position(&mut self, x: f32) {
+        self.boundary.x = x;
+    }
+    pub fn set_y_position(&mut self, y: f32) {
+        self.boundary.y = y;
     }
     pub fn set_velocity(&mut self, velocity: Vec2) {
         self.velocity = velocity;
@@ -64,10 +83,10 @@ impl Ball {
         self.boundary.x += self.velocity.x;
         self.boundary.y += self.velocity.y;
     }
-    pub fn reflect_velocity_x(&mut self) {
+    pub fn reflect_x_velocity(&mut self) {
         self.velocity.x = -self.velocity.x;
     }
-    pub fn reflect_velocity_y(&mut self) {
+    pub fn reflect_y_velocity(&mut self) {
         self.velocity.y = -self.velocity.y;
     }
 }
