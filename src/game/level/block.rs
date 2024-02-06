@@ -55,3 +55,14 @@ impl Block {
         self.boundary.move_to(position);
     }
 }
+
+fn random_color() -> Color {
+    use macroquad::rand::gen_range;
+
+    return Color {
+        r: gen_range(0.0, 1.0),
+        g: gen_range(0.0, 1.0),
+        b: gen_range(0.0, 1.0),
+        a: gen_range(0.0, 1.0),
+    };
+}

@@ -118,14 +118,3 @@ pub fn draw_border_offset(offset: Vec2, boundary: Rect, color: Color) {
 pub fn screen_size() -> Vec2 {
     return Vec2::new(screen_width(), screen_height());
 }
-
-pub fn random_color() -> Color {
-    use macroquad::rand::gen_range;
-
-    return Color {
-        r: gen_range(0.0, 1.0),
-        g: gen_range(0.0, 1.0),
-        b: gen_range(0.0, 1.0),
-        a: gen_range(0.0, 1.0),
-    };
-}
