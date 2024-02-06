@@ -1,5 +1,5 @@
 use macroquad::{
-    color::{Color, BLACK},
+    color::{Color, BLACK, GRAY},
     math::{Rect, Vec2},
     shapes::{draw_line, draw_rectangle},
     window::{screen_height, screen_width},
