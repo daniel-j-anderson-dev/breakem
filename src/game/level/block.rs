@@ -1,7 +1,5 @@
 use macroquad::prelude::*;
 
-use crate::game::draw::DEFAULT_BORDER_COLOR;
-
 #[derive(Debug, Clone, Copy)]
 pub struct Block {
     boundary: Rect,
