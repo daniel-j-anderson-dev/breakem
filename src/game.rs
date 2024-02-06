@@ -6,6 +6,7 @@ pub mod paddle;
 pub use crate::game::{ball::Ball, draw::screen_size, level::Level, paddle::Paddle};
 use macroquad::{
     prelude::*,
+    rand::gen_range,
     ui::{root_ui, widgets::Window},
 };
 
@@ -157,28 +158,29 @@ impl Game {
     }
     fn keep_in_play_field(&mut self) {
         // keep paddle in bounds
-        if self.paddle.boundary().left() < self.play_field.left() {
+        if self.paddle.next_boundary().left() < self.play_field.left() {
             self.paddle
-                .set_position(Vec2::new(self.play_field.left(), self.paddle.boundary().y));
+                .set_position(Vec2::new(self.play_field.left(), self.paddle.next_boundary().y));
         }
-        if self.paddle.boundary().right() > self.play_field.right() {
+        if self.paddle.next_boundary().right() > self.play_field.right() {
             self.paddle.set_position(Vec2::new(
-                self.play_field.right() - self.paddle.boundary().w,
-                self.paddle.boundary().y,
+                self.play_field.right() - self.paddle.next_boundary().w,
+                self.paddle.next_boundary().y,
             ));
         }
 
-        // keep ball in bounds
-        if self.ball.boundary().left() <= self.play_field.left()
-            || self.ball.boundary().right() >= self.play_field.right()
+        // keep ball in bounds. simple reflection on walls
+        if self.ball.next_boundary().left() <= self.play_field.left()
+            || self.ball.next_boundary().right() >= self.play_field.right()
         {
-            self.ball.reflect_velocity_x();
+            self.ball.reflect_x_velocity();
         }
-        if self.ball.boundary().top() <= self.play_field.top() {
-            self.ball.reflect_velocity_y();
+        if self.ball.next_boundary().top() <= self.play_field.top() {
+            self.ball.reflect_y_velocity();
         }
-        if self.ball.boundary().bottom() >= self.play_field.bottom() {
-            self.ball.reflect_velocity_y();
+        if self.ball.next_boundary().bottom() >= self.play_field.bottom() {
+            self.ball.reflect_y_velocity();
+
             self.lives -= 1;
         }
     }
