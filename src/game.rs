@@ -1,9 +1,9 @@
-pub mod ball;
-pub mod draw;
-pub mod level;
-pub mod paddle;
+mod ball;
+mod draw;
+mod level;
+mod paddle;
 
-pub use crate::game::{ball::Ball, draw::screen_size, level::Level, paddle::Paddle};
+use crate::game::{ball::Ball, draw::screen_size, level::Level, paddle::Paddle};
 use macroquad::{
     prelude::*,
     rand::gen_range,
@@ -145,7 +145,7 @@ impl Game {
             if block.boundary().overlaps(self.ball.boundary()) && block.is_alive {
                 let offset = self.ball.boundary().center().x - block.boundary().center().x;
                 let normalized_offset = offset / (block.boundary().w / 2.0);
-    
+
                 self.ball.set_velocity(Vec2::new(
                     normalized_offset * gen_range(2.0, 5.0),
                     -self.ball.velocity().y,
@@ -165,13 +165,14 @@ impl Game {
                 -self.ball.velocity().y,
             ));
         }
-
     }
     fn keep_in_play_field(&mut self) {
         // keep paddle in bounds
         if self.paddle.next_boundary().left() < self.play_field.left() {
-            self.paddle
-                .set_position(Vec2::new(self.play_field.left(), self.paddle.next_boundary().y));
+            self.paddle.set_position(Vec2::new(
+                self.play_field.left(),
+                self.paddle.next_boundary().y,
+            ));
         }
         if self.paddle.next_boundary().right() > self.play_field.right() {
             self.paddle.set_position(Vec2::new(
