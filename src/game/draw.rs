@@ -57,12 +57,7 @@ impl Game {
     }
 }
 
-pub fn draw_bordered_offset(
-    offset: Vec2,
-    rect: &Rect,
-    interior_color: Color,
-    border_color: Color,
-) {
+pub fn draw_bordered_offset(offset: Vec2, rect: &Rect, interior_color: Color, border_color: Color) {
     draw_rectangle(
         offset.x + rect.x,
         offset.y + rect.y,

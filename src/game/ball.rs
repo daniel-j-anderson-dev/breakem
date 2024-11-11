@@ -38,42 +38,17 @@ impl Ball {
         next_hitbox.y += self.velocity.y;
         next_hitbox
     }
-    pub fn next_position(&self) -> Vec2 {
-        let mut next_position = self.position();
-        next_position.x += self.velocity.x;
-        next_position.y += self.velocity.y;
-        next_position
-    }
-    pub fn position(&self) -> Vec2 {
-        self.hitbox.point()
-    }
     pub fn velocity(&self) -> Vec2 {
         self.velocity
+    }
+    pub fn set_velocity(&mut self, velocity: Vec2) {
+        self.velocity = velocity;
     }
     pub fn interior_color(&self) -> Color {
         self.interior_color
     }
     pub fn border_color(&self) -> Color {
         self.border_color
-    }
-    pub fn set_border_color(&mut self, border_color: Color) {
-        self.border_color = border_color;
-    }
-    pub fn set_hitbox(&mut self, hitbox: Rect) {
-        self.hitbox = hitbox;
-    }
-    pub fn set_position(&mut self, position: Vec2) {
-        self.set_x_position(position.x);
-        self.set_y_position(position.y);
-    }
-    pub fn set_x_position(&mut self, x: f32) {
-        self.hitbox.x = x;
-    }
-    pub fn set_y_position(&mut self, y: f32) {
-        self.hitbox.y = y;
-    }
-    pub fn set_velocity(&mut self, velocity: Vec2) {
-        self.velocity = velocity;
     }
 }
 

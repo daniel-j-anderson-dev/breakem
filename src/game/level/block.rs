@@ -34,23 +34,8 @@ impl Block {
     pub fn is_alive(&self) -> bool {
         self.is_alive
     }
-    pub fn position(&self) -> Vec2 {
-        self.hitbox.point()
-    }
-    pub fn set_border_color(&mut self, border_color: Color) {
-        self.border_color = border_color;
-    }
     pub fn set_is_alive(&mut self, is_alive: bool) {
         self.is_alive = is_alive
-    }
-    pub fn set_hitbox(&mut self, hitbox: Rect) {
-        self.hitbox = hitbox;
-    }
-    pub fn set_color(&mut self, color: Color) {
-        self.interior_color = color;
-    }
-    pub fn set_position(&mut self, position: Vec2) {
-        self.hitbox.move_to(position);
     }
 }
 
