@@ -16,7 +16,7 @@ impl Paddle {
     pub const LEVEL_BUFFER: f32 = Paddle::DEFAULT_HEIGHT * 8.0;
 
     pub fn in_level(level: &Level) -> Self {
-        ddle 
+        Paddle {
             hitbox: Rect {
                 x: level.hitbox().left() + level.hitbox().w / 2.0,
                 y: level.hitbox().bottom() + Paddle::LEVEL_BUFFER,
