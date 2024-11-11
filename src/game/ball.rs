@@ -13,7 +13,7 @@ pub struct Ball {
 impl Ball {
     pub const DEFAULT_SIZE: f32 = 10.0;
     pub fn on_paddle(paddle: &Paddle) -> Self {
-        return Ball {
+        Ball {
             hitbox: Rect {
                 x: paddle.hitbox().x + (paddle.hitbox().w / 2.0),
                 y: paddle.hitbox().top() - Ball::DEFAULT_SIZE,
@@ -23,38 +23,38 @@ impl Ball {
             velocity: Vec2::NEG_ONE.normalize() * 5.0,
             interior_color: paddle.interior_color(),
             border_color: DEFAULT_BORDER_COLOR,
-        };
+        }
     }
 }
 
 // setters and getters
 impl Ball {
     pub fn hitbox(&self) -> &Rect {
-        return &self.hitbox;
+        &self.hitbox
     }
     pub fn next_hitbox(&self) -> Rect {
         let mut next_hitbox = self.hitbox;
         next_hitbox.x += self.velocity.x;
         next_hitbox.y += self.velocity.y;
-        return next_hitbox;
+        next_hitbox
     }
     pub fn next_position(&self) -> Vec2 {
         let mut next_position = self.position();
         next_position.x += self.velocity.x;
         next_position.y += self.velocity.y;
-        return next_position;
+        next_position
     }
     pub fn position(&self) -> Vec2 {
-        return self.hitbox.point();
+        self.hitbox.point()
     }
     pub fn velocity(&self) -> Vec2 {
-        return self.velocity;
+        self.velocity
     }
     pub fn interior_color(&self) -> Color {
-        return self.interior_color;
+        self.interior_color
     }
     pub fn border_color(&self) -> Color {
-        return self.border_color;
+        self.border_color
     }
     pub fn set_border_color(&mut self, border_color: Color) {
         self.border_color = border_color;

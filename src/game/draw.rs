@@ -1,7 +1,7 @@
 use macroquad::{
-    color::{Color, BLACK, GRAY},
+    color::{Color, BLACK},
     math::{Rect, Vec2},
-    shapes::{draw_line, draw_rectangle, draw_rectangle_lines},
+    shapes::{draw_rectangle, draw_rectangle_lines},
     window::{screen_height, screen_width},
 };
 
@@ -80,5 +80,5 @@ pub fn draw_bordered_offset(
 }
 
 pub fn screen_size() -> Vec2 {
-    return Vec2::new(screen_width(), screen_height());
+    Vec2::new(screen_width(), screen_height())
 }

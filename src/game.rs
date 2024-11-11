@@ -43,7 +43,7 @@ impl Game {
             h: level.hitbox().h + Paddle::LEVEL_BUFFER + Paddle::DEFAULT_HEIGHT,
         };
 
-        return Game {
+        Game {
             state: GameState::NotPlaying(Menu::Main),
             level,
             paddle,
@@ -52,7 +52,7 @@ impl Game {
             play_field_offset,
             lives: 10,
             score: 0,
-        };
+        }
     }
 }
 

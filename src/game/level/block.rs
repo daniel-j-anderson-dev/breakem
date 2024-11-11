@@ -11,31 +11,31 @@ pub struct Block {
 // constructors and constants
 impl Block {
     pub fn new(hitbox: Rect, color: Color, border_color: Color) -> Self {
-        return Block {
+        Block {
             hitbox,
             interior_color: color,
             is_alive: true,
             border_color,
-        };
+        }
     }
 }
 
 // setters and getters
 impl Block {
     pub fn border_color(&self) -> Color {
-        return self.border_color;
+        self.border_color
     }
     pub fn hitbox(&self) -> &Rect {
-        return &self.hitbox;
+        &self.hitbox
     }
     pub fn interior_color(&self) -> Color {
-        return self.interior_color;
+        self.interior_color
     }
     pub fn is_alive(&self) -> bool {
-        return self.is_alive;
+        self.is_alive
     }
     pub fn position(&self) -> Vec2 {
-        return self.hitbox.point();
+        self.hitbox.point()
     }
     pub fn set_border_color(&mut self, border_color: Color) {
         self.border_color = border_color;
@@ -57,10 +57,10 @@ impl Block {
 fn random_color() -> Color {
     use macroquad::rand::gen_range;
 
-    return Color {
+    Color {
         r: gen_range(0.0, 1.0),
         g: gen_range(0.0, 1.0),
         b: gen_range(0.0, 1.0),
         a: gen_range(0.0, 1.0),
-    };
+    }
 }
