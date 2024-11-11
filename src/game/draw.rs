@@ -1,7 +1,7 @@
 use macroquad::{
     color::{Color, BLACK, GRAY},
     math::{Rect, Vec2},
-    shapes::{draw_line, draw_rectangle},
+    shapes::{draw_line, draw_rectangle, draw_rectangle_lines},
     window::{screen_height, screen_width},
 };
 
@@ -18,9 +18,12 @@ impl Game {
         self.draw_paddle();
     }
     fn draw_play_field(&self) {
-        draw_border_offset(
-            self.play_field_offset,
-            self.play_field,
+        draw_rectangle_lines(
+            self.play_field.x + self.play_field_offset.x,
+            self.play_field.y + self.play_field_offset.y,
+            self.play_field.w,
+            self.play_field.h,
+            BORDER_THICKNESS,
             DEFAULT_BORDER_COLOR,
         );
     }
@@ -73,45 +76,6 @@ pub fn draw_bordered_offset(
         boundary.w - (BORDER_THICKNESS * (5.0 / 3.0)),
         boundary.h - (BORDER_THICKNESS * (5.0 / 3.0)),
         interior_color,
-    );
-}
-pub fn draw_border_offset(offset: Vec2, boundary: Rect, color: Color) {
-    let top_left = Vec2::new(boundary.left(), boundary.top()) + offset;
-    let top_right = Vec2::new(boundary.right(), boundary.top()) + offset;
-    let bottom_left = Vec2::new(boundary.left(), boundary.bottom()) + offset;
-    let bottom_right = Vec2::new(boundary.right(), boundary.bottom()) + offset;
-
-    draw_line(
-        top_left.x,
-        top_left.y,
-        top_right.x,
-        top_right.y,
-        BORDER_THICKNESS,
-        color,
-    );
-    draw_line(
-        top_right.x,
-        top_right.y,
-        bottom_right.x,
-        bottom_right.y,
-        BORDER_THICKNESS,
-        color,
-    );
-    draw_line(
-        bottom_right.x,
-        bottom_right.y,
-        bottom_left.x,
-        bottom_left.y,
-        BORDER_THICKNESS,
-        color,
-    );
-    draw_line(
-        bottom_left.x,
-        bottom_left.y,
-        top_left.x,
-        top_left.y,
-        BORDER_THICKNESS,
-        color,
     );
 }
 
