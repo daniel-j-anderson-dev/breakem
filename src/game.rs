@@ -24,12 +24,8 @@ pub struct Game {
     lives: usize,
     score: usize,
 }
-
-// constructors
-impl Game {
-    pub fn new() -> Self {
-        seed_random_with_current_time();
-
+impl Default for Game {
+    fn default() -> Self {
         let level = Level::one();
         let paddle = Paddle::in_level(&level);
         let ball = Ball::on_paddle(&paddle);
@@ -53,6 +49,13 @@ impl Game {
             lives: 10,
             score: 0,
         }
+    }
+}
+
+// constructors
+impl Game {
+    pub fn seed_random() {
+        seed_random_with_current_time();
     }
 }
 
@@ -94,7 +97,7 @@ impl Game {
 // helpers
 impl Game {
     pub fn full_reset(&mut self) {
-        *self = Game::new();
+        *self = Game::default();
     }
     fn level_reset(&mut self) {
         self.level = Level::one();

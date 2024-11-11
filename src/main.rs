@@ -3,7 +3,8 @@ use macroquad::prelude::*;
 
 #[macroquad::main("breakem")]
 async fn main() {
-    let mut game = Game::new();
+    Game::seed_random();
+    let mut game = Game::default();
 
     loop {
         clear_background(GRAY);
