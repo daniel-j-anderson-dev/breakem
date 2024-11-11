@@ -2,7 +2,7 @@ use macroquad::prelude::*;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Block {
-    boundary: Rect,
+    hitbox: Rect,
     is_alive: bool,
     interior_color: Color,
     border_color: Color,
@@ -10,9 +10,9 @@ pub struct Block {
 
 // constructors and constants
 impl Block {
-    pub fn new(boundary: Rect, color: Color, border_color: Color) -> Self {
+    pub fn new(hitbox: Rect, color: Color, border_color: Color) -> Self {
         return Block {
-            boundary,
+            hitbox,
             interior_color: color,
             is_alive: true,
             border_color,
@@ -25,8 +25,8 @@ impl Block {
     pub fn border_color(&self) -> Color {
         return self.border_color;
     }
-    pub fn boundary(&self) -> &Rect {
-        return &self.boundary;
+    pub fn hitbox(&self) -> &Rect {
+        return &self.hitbox;
     }
     pub fn interior_color(&self) -> Color {
         return self.interior_color;
@@ -35,7 +35,7 @@ impl Block {
         return self.is_alive;
     }
     pub fn position(&self) -> Vec2 {
-        return self.boundary.point();
+        return self.hitbox.point();
     }
     pub fn set_border_color(&mut self, border_color: Color) {
         self.border_color = border_color;
@@ -43,14 +43,14 @@ impl Block {
     pub fn set_is_alive(&mut self, is_alive: bool) {
         self.is_alive = is_alive
     }
-    pub fn set_boundary(&mut self, boundary: Rect) {
-        self.boundary = boundary;
+    pub fn set_hitbox(&mut self, hitbox: Rect) {
+        self.hitbox = hitbox;
     }
     pub fn set_color(&mut self, color: Color) {
         self.interior_color = color;
     }
     pub fn set_position(&mut self, position: Vec2) {
-        self.boundary.move_to(position);
+        self.hitbox.move_to(position);
     }
 }
 

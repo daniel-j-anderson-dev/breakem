@@ -2241,7 +2241,7 @@ Level {
             },
         ),
     ],
-    boundary: Rect {
+    hitbox: Rect {
         x: 0.0,
         y: 0.0,
         w: 320.0,

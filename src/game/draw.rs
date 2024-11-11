@@ -19,10 +19,10 @@ impl Game {
     }
     fn draw_play_field(&self) {
         draw_rectangle_lines(
-            self.play_field.x + self.play_field_offset.x,
-            self.play_field.y + self.play_field_offset.y,
-            self.play_field.w,
-            self.play_field.h,
+            self.play_field_hitbox.x + self.play_field_offset.x,
+            self.play_field_hitbox.y + self.play_field_offset.y,
+            self.play_field_hitbox.w,
+            self.play_field_hitbox.h,
             BORDER_THICKNESS,
             DEFAULT_BORDER_COLOR,
         );
@@ -32,7 +32,7 @@ impl Game {
             if block.is_alive() {
                 draw_bordered_offset(
                     self.play_field_offset,
-                    block.boundary(),
+                    block.hitbox(),
                     block.interior_color(),
                     block.border_color(),
                 );
@@ -42,7 +42,7 @@ impl Game {
     fn draw_ball(&self) {
         draw_bordered_offset(
             self.play_field_offset,
-            self.ball.boundary(),
+            self.ball.hitbox(),
             self.ball.interior_color(),
             self.ball.border_color(),
         );
@@ -50,7 +50,7 @@ impl Game {
     fn draw_paddle(&self) {
         draw_bordered_offset(
             self.play_field_offset,
-            self.paddle.boundary(),
+            self.paddle.hitbox(),
             self.paddle.interior_color(),
             self.paddle.border_color(),
         );
@@ -59,22 +59,22 @@ impl Game {
 
 pub fn draw_bordered_offset(
     offset: Vec2,
-    boundary: &Rect,
+    rect: &Rect,
     interior_color: Color,
     border_color: Color,
 ) {
     draw_rectangle(
-        offset.x + boundary.x,
-        offset.y + boundary.y,
-        boundary.w,
-        boundary.h,
+        offset.x + rect.x,
+        offset.y + rect.y,
+        rect.w,
+        rect.h,
         border_color,
     );
     draw_rectangle(
-        offset.x + boundary.x + BORDER_THICKNESS,
-        offset.y + boundary.y + BORDER_THICKNESS,
-        boundary.w - (BORDER_THICKNESS * (5.0 / 3.0)),
-        boundary.h - (BORDER_THICKNESS * (5.0 / 3.0)),
+        offset.x + rect.x + BORDER_THICKNESS,
+        offset.y + rect.y + BORDER_THICKNESS,
+        rect.w - (BORDER_THICKNESS * (5.0 / 3.0)),
+        rect.h - (BORDER_THICKNESS * (5.0 / 3.0)),
         interior_color,
     );
 }

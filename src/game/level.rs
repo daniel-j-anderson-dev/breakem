@@ -6,7 +6,7 @@ use macroquad::prelude::*;
 #[derive(Debug)]
 pub struct Level {
     blocks: Vec<Block>,
-    boundary: Rect,
+    hitbox: Rect,
     id: usize,
 }
 
@@ -18,8 +18,8 @@ impl Level {
 
 // getters
 impl Level {
-    pub fn boundary(&self) -> Rect {
-        return self.boundary;
+    pub fn hitbox(&self) -> Rect {
+        return self.hitbox;
     }
     pub fn id(&self) -> usize {
         return self.id;

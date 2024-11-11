@@ -19,7 +19,7 @@ pub struct Game {
     level: Level,
     paddle: Paddle,
     ball: Ball,
-    play_field: Rect,
+    play_field_hitbox: Rect,
     play_field_offset: Vec2,
     lives: usize,
     score: usize,
@@ -34,13 +34,13 @@ impl Game {
         let paddle = Paddle::in_level(&level);
         let ball = Ball::on_paddle(&paddle);
 
-        let play_field_offset = (screen_size() - level.boundary().size()) / 2.0;
+        let play_field_offset = (screen_size() - level.hitbox().size()) / 2.0;
 
         let play_field = Rect {
             x: 0.0,
             y: 0.0,
-            w: level.boundary().w,
-            h: level.boundary().h + Paddle::LEVEL_BUFFER + Paddle::DEFAULT_HEIGHT,
+            w: level.hitbox().w,
+            h: level.hitbox().h + Paddle::LEVEL_BUFFER + Paddle::DEFAULT_HEIGHT,
         };
 
         return Game {
@@ -48,7 +48,7 @@ impl Game {
             level,
             paddle,
             ball,
-            play_field,
+            play_field_hitbox: play_field,
             play_field_offset,
             lives: 10,
             score: 0,

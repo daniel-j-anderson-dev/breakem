@@ -3,7 +3,7 @@ use macroquad::prelude::*;
 use super::{draw::DEFAULT_BORDER_COLOR, Level};
 
 pub struct Paddle {
-    boundary: Rect,
+    hitbox: Rect,
     velocity: Vec2,
     interior_color: Color,
     border_color: Color,
@@ -17,9 +17,9 @@ impl Paddle {
 
     pub fn in_level(level: &Level) -> Self {
         return Paddle {
-            boundary: Rect {
-                x: level.boundary().left() + level.boundary().w / 2.0,
-                y: level.boundary().bottom() + Paddle::LEVEL_BUFFER,
+            hitbox: Rect {
+                x: level.hitbox().left() + level.hitbox().w / 2.0,
+                y: level.hitbox().bottom() + Paddle::LEVEL_BUFFER,
                 w: Paddle::DEFAULT_WIDTH,
                 h: Paddle::DEFAULT_HEIGHT,
             },
@@ -32,14 +32,14 @@ impl Paddle {
 
 // getters and setters
 impl Paddle {
-    pub fn boundary(&self) -> &Rect {
-        return &self.boundary;
+    pub fn hitbox(&self) -> &Rect {
+        return &self.hitbox;
     }
-    pub fn next_boundary(&self) -> Rect {
-        let mut next_boundary = self.boundary;
-        next_boundary.x += self.velocity.x;
-        next_boundary.y += self.velocity.y;
-        return next_boundary;
+    pub fn next_hitbox(&self) -> Rect {
+        let mut next_hitbox = self.hitbox;
+        next_hitbox.x += self.velocity.x;
+        next_hitbox.y += self.velocity.y;
+        return next_hitbox;
     }
     pub fn next_position(&self) -> Vec2 {
         let mut next_position = self.position();
@@ -48,7 +48,7 @@ impl Paddle {
         return next_position;
     }
     pub fn position(&self) -> Vec2 {
-        return self.boundary.point();
+        return self.hitbox.point();
     }
     pub fn velocity(&self) -> Vec2 {
         return self.velocity;
@@ -62,8 +62,8 @@ impl Paddle {
     pub fn set_border_color(&mut self, border_color: Color) {
         self.border_color = border_color;
     }
-    pub fn set_boundary(&mut self, boundary: Rect) {
-        self.boundary = boundary;
+    pub fn set_hitbox(&mut self, hitbox: Rect) {
+        self.hitbox = hitbox;
     }
     pub fn set_velocity(&mut self, velocity: Vec2) {
         self.velocity = velocity;
@@ -72,7 +72,7 @@ impl Paddle {
         self.interior_color = color;
     }
     pub fn set_position(&mut self, position: Vec2) {
-        self.boundary.move_to(position);
+        self.hitbox.move_to(position);
     }
 }
 
@@ -91,7 +91,7 @@ impl Paddle {
         self.velocity = self.velocity.normalize_or_zero() * 10.0;
     }
     pub fn apply_velocity(&mut self) {
-        self.boundary.x += self.velocity.x;
-        self.boundary.y += self.velocity.y;
+        self.hitbox.x += self.velocity.x;
+        self.hitbox.y += self.velocity.y;
     }
 }
