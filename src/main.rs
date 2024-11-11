@@ -1,6 +1,5 @@
-mod game;
 
-use game::Game;
+use breakem::game::Game;
 use macroquad::prelude::*;
 
 #[macroquad::main("breakem")]
